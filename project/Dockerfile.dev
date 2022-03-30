@@ -7,6 +7,10 @@ RUN dotnet dev-certs https
 #run a build at this stage to detect issues earlier.
 RUN dotnet build
 
+#install dotnet-ef for running migration
+RUN dotnet tool install -g dotnet-ef
+ENV PATH $PATH:/root/.dotnet/tools
+
 ENV ASPNETCORE_URLS=https://*:5002
 CMD dotnet watch run
 

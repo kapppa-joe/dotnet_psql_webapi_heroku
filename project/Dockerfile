@@ -4,6 +4,11 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 as build
 
 WORKDIR /source
 COPY . /source/
+
+# install dotnet ef for running migration 
+RUN dotnet tool install -g dotnet-ef
+ENV PATH $PATH:/root/.dotnet/tools
+
 RUN dotnet publish -c release -o /app
 
 # run the production app with another image
